@@ -1,26 +1,428 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdf6f0;
+  --foreground: #8b4d5c;
+  --primary: #e8b4b8;
+  --secondary: #a8d5ba;
+  --accent: #f5e6a3;
+  --card-blue: #d4e8f2;
+  --card-pink: #ffe4e8;
+  --card-yellow: #fff8dc;
+  --text-primary: #6b4c4c;
+  --text-secondary: #8b7b7b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Center page content */
+.page-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+/* Grid background pattern */
+.grid-pattern {
+  background-image: linear-gradient(
+      rgba(200, 180, 160, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(200, 180, 160, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* 3D Button styles */
+.btn-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) translateZ(0);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2), 0 6px 10px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-3d:hover {
+  transform: perspective(1000px) translateY(-4px) translateZ(10px);
+  box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.2), 0 12px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-3d:active {
+  transform: perspective(1000px) translateY(2px) translateZ(0);
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2), 0 3px 5px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 3D Card styles */
+.card-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 0 -5px rgba(0, 0, 0, 0.1),
+    0 20px 25px -10px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.card-3d:hover {
+  transform: perspective(1000px) rotateX(-5deg) rotateY(5deg) translateZ(20px)
+    translateY(-10px);
+  box-shadow: 0 20px 0 -10px rgba(0, 0, 0, 0.1),
+    0 40px 40px -15px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.8);
+}
+
+.card-3d::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+/* Emotion button 3D */
+.emotion-btn-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(800px) translateZ(0);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 6px 0 -2px rgba(0, 0, 0, 0.15), 0 8px 15px rgba(0, 0, 0, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.emotion-btn-3d:hover {
+  transform: perspective(800px) translateY(-6px) translateZ(15px) rotateX(-5deg);
+  box-shadow: 0 12px 0 -4px rgba(0, 0, 0, 0.15), 0 20px 25px rgba(0, 0, 0, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 0.7);
+}
+
+.emotion-btn-3d:active {
+  transform: perspective(800px) translateY(2px) translateZ(0);
+  box-shadow: 0 2px 0 -1px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(-2deg);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Bounce animation */
+@keyframes bounce-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.bounce-soft {
+  animation: bounce-soft 2s ease-in-out infinite;
+}
+
+/* Sparkle animation */
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(232, 180, 184, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(232, 180, 184, 0.8);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Rotate animation */
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+/* Wave animation */
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.wave {
+  animation: wave 2.5s infinite;
+  transform-origin: 70% 70%;
+}
+
+/* Fade in up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Scale in */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+/* Heart beat */
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+}
+
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdf6f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e8b4b8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4a3a7;
+}
+
+/* Letter paper effect */
+.letter-paper {
+  background: linear-gradient(180deg, #fffef9 0%, #fff9e6 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(200, 180, 160, 0.3);
+}
+
+/* Torn paper edge effect */
+.torn-edge {
+  position: relative;
+}
+
+.torn-edge::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath d='M0 10 Q5 0 10 10 Q15 0 20 10 Q25 0 30 10 Q35 0 40 10 Q45 0 50 10 Q55 0 60 10 Q65 0 70 10 Q75 0 80 10 Q85 0 90 10 Q95 0 100 10' fill='%23FFFEF9'/%3E%3C/svg%3E")
+    repeat-x;
+}
+
+/* Confetti animation */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+  }
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #e8b4b8;
+  animation: confetti-fall 3s linear forwards;
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Emotion card colors */
+.emotion-happy {
+  background: linear-gradient(135deg, #f5f99a 0%, #e8f5a3 100%);
+}
+.emotion-pressure {
+  background: linear-gradient(135deg, #d4e8f2 0%, #b8d4e8 100%);
+}
+.emotion-lonely {
+  background: linear-gradient(135deg, #d4d4d4 0%, #c0c0c0 100%);
+}
+.emotion-tired {
+  background: linear-gradient(135deg, #d8bfd8 0%, #c8a8c8 100%);
+}
+.emotion-anxious {
+  background: linear-gradient(135deg, #e8d4f2 0%, #d4c0e8 100%);
+}
+.emotion-disappointed {
+  background: linear-gradient(135deg, #f5d4d4 0%, #e8c0c0 100%);
+}
+.emotion-sad {
+  background: linear-gradient(135deg, #ffd4a3 0%, #f5c090 100%);
+}
+.emotion-relationship {
+  background: linear-gradient(135deg, #d4f5d4 0%, #b8e8b8 100%);
+}
+.emotion-other {
+  background: linear-gradient(135deg, #f5e8e8 0%, #e8d4d4 100%);
+}
+
+/* Typing cursor */
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.typing-cursor::after {
+  content: "|";
+  animation: blink 1s infinite;
 }

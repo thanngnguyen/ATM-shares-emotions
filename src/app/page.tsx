@@ -1,65 +1,233 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Lock, PenLine, BookOpen, Sparkles, Heart } from "lucide-react";
+import FlowerIcon from "@/components/FlowerIcon";
+import FeatureCard from "@/components/FeatureCard";
+import EmotionSelector from "@/components/EmotionSelector";
+import ShareForm from "@/components/ShareForm";
+import LetterResult from "@/components/LetterResult";
+import ListenStories from "@/components/ListenStories";
+import ActionCardDisplay from "@/components/ActionCardDisplay";
+import { Emotion } from "@/data/emotions";
+import { getRandomLetters, Letter } from "@/data/letters";
+
+type PageState =
+  | "home"
+  | "select-emotion"
+  | "share-form"
+  | "letter-result"
+  | "listen"
+  | "action-card";
 
 export default function Home() {
+  const [pageState, setPageState] = useState<PageState>("home");
+  const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(null);
+  const [letters, setLetters] = useState<Letter[]>([]);
+
+  const handleSelectEmotion = (emotion: Emotion) => {
+    setSelectedEmotion(emotion);
+    setPageState("share-form");
+  };
+
+  const handleSubmitShare = () => {
+    if (selectedEmotion) {
+      const randomLetters = getRandomLetters(selectedEmotion.id, 3);
+      setLetters(randomLetters);
+      setPageState("letter-result");
+    }
+  };
+
+  const goHome = () => {
+    setPageState("home");
+    setSelectedEmotion(null);
+    setLetters([]);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <AnimatePresence mode="wait">
+      {pageState === "home" && (
+        <motion.div
+          key="home"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="min-h-screen grid-pattern flex flex-col justify-center items-center py-8"
+        >
+          {/* Main Content */}
+          <div className="max-w-5xl w-full mx-auto px-4">
+            {/* Header */}
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              {/* Title with Flower */}
+              <div className="flex items-center justify-center gap-6 mb-6">
+                <motion.h1
+                  className="text-5xl md:text-6xl font-bold text-[#8B4D5C]"
+                  style={{ fontFamily: "serif" }}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  CHIA SẺ
+                </motion.h1>
+
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.4, type: "spring" }}
+                >
+                  <FlowerIcon />
+                </motion.div>
+
+                <motion.h1
+                  className="text-5xl md:text-6xl font-bold text-[#8B4D5C]"
+                  style={{ fontFamily: "serif" }}
+                  initial={{ x: 50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  CẢM XÚC
+                </motion.h1>
+              </div>
+
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-[#6B4C4C] text-sm md:text-base mb-8 italic"
+              >
+                (Dự án được thực hiện bởi sinh viên trường Khoa học liên ngành
+                và nghệ thuật - Đại học quốc gia Hà Nội)
+              </motion.p>
+
+              {/* Anonymous badge */}
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.6, type: "spring" }}
+                className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm px-5 py-3 rounded-full shadow-sm"
+                style={{ padding: "3px 8px", marginTop: "10px" }}
+              >
+                <Lock className="w-5 h-5 text-[#D4A574]" />
+                <span className="font-bold text-[#8B4D5C] tracking-wide text-sm md:text-base">
+                  100% ẨN DANH - KHÔNG LƯU DANH TÍNH
+                </span>
+              </motion.div>
+            </motion.div>
+
+            {/* Feature Cards Container */}
+            <div className="mt-24">
+              <div className="max-w-7xl mx-auto">
+                {/* Top row - 2 cards */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-28 gap-y-24 mb-32">
+                  {/* Share Card */}
+                  <FeatureCard
+                    icon={<span className="text-4xl">📝</span>}
+                    title="TÔI MUỐN CHIA SẺ"
+                    description="Viết ra điều bạn đang giữ trong lòng. Chọn nhóm cảm xúc phù hợp và gửi ẩn danh ❤️"
+                    buttonText="BẮT ĐẦU"
+                    bgColor="bg-[#D4EEF7]"
+                    borderColor="border-[#B8DDE8]"
+                    onClick={() => setPageState("select-emotion")}
+                    delay={0.7}
+                  />
+
+                  {/* Listen Card */}
+                  <FeatureCard
+                    icon={<span className="text-4xl">📖</span>}
+                    title="TÔI MUỐN LẮNG NGHE"
+                    description="Đọc tâm sự ẩn danh đã được chọn lọc và gửi lại một lời động viên ấm lòng 🌸"
+                    buttonText="BẮT ĐẦU"
+                    bgColor="bg-[#FFF0F0]"
+                    borderColor="border-[#F5D0D0]"
+                    onClick={() => setPageState("listen")}
+                    delay={0.8}
+                  />
+                </div>
+
+                {/* Bottom row - 1 card centered */}
+                <div className="flex justify-center">
+                  <div className="w-full lg:w-2/3 xl:w-1/2">
+                    <FeatureCard
+                      icon={<span className="text-4xl">✨</span>}
+                      title="CHUYỂN HÓA CẢM XÚC"
+                      description="Nhận một thẻ hành động nhỏ để đưa cảm xúc về trạng thái cân bằng 🌱"
+                      buttonText="BẮT ĐẦU"
+                      bgColor="bg-[#FFF9E6]"
+                      borderColor="border-[#F0E4C0]"
+                      onClick={() => setPageState("action-card")}
+                      delay={0.9}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Floating decorations */}
+          <motion.div
+            className="fixed bottom-10 left-10 pointer-events-none hidden md:block"
+            animate={{ y: [0, -15, 0] }}
+            transition={{ duration: 4, repeat: Infinity }}
+          >
+            <Heart className="w-8 h-8 text-pink-300 fill-pink-200" />
+          </motion.div>
+
+          <motion.div
+            className="fixed bottom-20 right-10 pointer-events-none hidden md:block"
+            animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
+            <span className="text-4xl">🌸</span>
+          </motion.div>
+
+          <motion.div
+            className="fixed top-40 right-20 pointer-events-none hidden md:block"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <span className="text-2xl">✨</span>
+          </motion.div>
+        </motion.div>
+      )}
+
+      {pageState === "select-emotion" && (
+        <EmotionSelector
+          key="select-emotion"
+          onSelectEmotion={handleSelectEmotion}
+          onBack={goHome}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      )}
+
+      {pageState === "share-form" && selectedEmotion && (
+        <ShareForm
+          key="share-form"
+          emotion={selectedEmotion.id}
+          onSubmit={handleSubmitShare}
+          onBack={() => setPageState("select-emotion")}
+        />
+      )}
+
+      {pageState === "letter-result" && selectedEmotion && (
+        <LetterResult
+          key="letter-result"
+          letters={letters}
+          emotion={selectedEmotion.id}
+          onGoHome={goHome}
+        />
+      )}
+
+      {pageState === "listen" && <ListenStories key="listen" onBack={goHome} />}
+
+      {pageState === "action-card" && (
+        <ActionCardDisplay key="action-card" onGoHome={goHome} />
+      )}
+    </AnimatePresence>
   );
 }
