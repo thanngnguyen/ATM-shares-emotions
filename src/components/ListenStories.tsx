@@ -51,12 +51,38 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
     setIsLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 500));
 
+    // Lấy stories từ localStorage (stories do người dùng viết)
+    let userStories: SharedStory[] = [];
+    try {
+      const stored = localStorage.getItem("userStories");
+      if (stored) {
+        userStories = JSON.parse(stored).map(
+          (s: {
+            id: string;
+            emotion: string;
+            content: string;
+            createdAt: string;
+            hearts: number;
+            encouragements: Encouragement[];
+          }) => ({
+            ...s,
+            createdAt: new Date(s.createdAt),
+          })
+        );
+      }
+    } catch (e) {
+      console.error("Error loading user stories:", e);
+    }
+
+    // Kết hợp với sample stories
+    const allStories = [...userStories, ...sharedStories];
+
     if (selectedEmotion === "all") {
-      setStories(getRandomStories(10));
+      // Shuffle và lấy 10 stories
+      const shuffled = allStories.sort(() => Math.random() - 0.5);
+      setStories(shuffled.slice(0, 10));
     } else {
-      const filtered = sharedStories.filter(
-        (s) => s.emotion === selectedEmotion
-      );
+      const filtered = allStories.filter((s) => s.emotion === selectedEmotion);
       setStories(filtered);
     }
     setIsLoading(false);

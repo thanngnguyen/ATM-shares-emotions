@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 
 interface ShareFormProps {
   emotion: string;
-  onSubmit: () => void;
+  onSubmit: (content: string) => void;
   onBack: () => void;
 }
 
@@ -18,7 +18,7 @@ const ShareForm: React.FC<ShareFormProps> = ({ emotion, onSubmit, onBack }) => {
     if (content.trim().length < 10) return;
     setIsSubmitting(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    onSubmit();
+    onSubmit(content.trim());
     setIsSubmitting(false);
   };
 

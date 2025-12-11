@@ -25,24 +25,50 @@ export default function Home() {
   const [pageState, setPageState] = useState<PageState>("home");
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(null);
   const [letters, setLetters] = useState<Letter[]>([]);
+  const [pendingStoryContent, setPendingStoryContent] = useState<string>("");
 
   const handleSelectEmotion = (emotion: Emotion) => {
     setSelectedEmotion(emotion);
     setPageState("share-form");
   };
 
-  const handleSubmitShare = () => {
+  const handleSubmitShare = (content: string) => {
     if (selectedEmotion) {
+      setPendingStoryContent(content);
       const randomLetters = getRandomLetters(selectedEmotion.id, 3);
       setLetters(randomLetters);
       setPageState("letter-result");
     }
   };
 
+  const handleGoHomeFromLetterResult = () => {
+    // Lưu story vào localStorage khi người dùng đã xem xong letters
+    if (selectedEmotion && pendingStoryContent) {
+      const newStory = {
+        id: `user-${Date.now()}`,
+        emotion: selectedEmotion.id,
+        content: pendingStoryContent,
+        createdAt: new Date().toISOString(),
+        hearts: 0,
+        encouragements: [],
+      };
+
+      // Lấy stories hiện có từ localStorage
+      const existingStories = JSON.parse(
+        localStorage.getItem("userStories") || "[]"
+      );
+      existingStories.unshift(newStory);
+      localStorage.setItem("userStories", JSON.stringify(existingStories));
+    }
+
+    goHome();
+  };
+
   const goHome = () => {
     setPageState("home");
     setSelectedEmotion(null);
     setLetters([]);
+    setPendingStoryContent("");
   };
 
   return (
@@ -219,7 +245,7 @@ export default function Home() {
           key="letter-result"
           letters={letters}
           emotion={selectedEmotion.id}
-          onGoHome={goHome}
+          onGoHome={handleGoHomeFromLetterResult}
         />
       )}
 
