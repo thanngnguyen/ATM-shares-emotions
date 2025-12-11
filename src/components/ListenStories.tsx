@@ -6,6 +6,7 @@ import {
   sharedStories,
   SharedStory,
   getRandomStories,
+  Encouragement,
 } from "@/data/sharedStories";
 import { emotions, getEmotionById } from "@/data/emotions";
 import {
@@ -15,6 +16,10 @@ import {
   MessageCircle,
   RefreshCw,
   ArrowLeft,
+  Send,
+  X,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -26,6 +31,17 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
   const [stories, setStories] = useState<SharedStory[]>([]);
   const [selectedEmotion, setSelectedEmotion] = useState<string>("all");
   const [isLoading, setIsLoading] = useState(true);
+
+  // State cho chức năng mới
+  const [likedStories, setLikedStories] = useState<Set<string>>(new Set());
+  const [showEncouragementModal, setShowEncouragementModal] = useState<
+    string | null
+  >(null);
+  const [encouragementText, setEncouragementText] = useState("");
+  const [expandedEncouragements, setExpandedEncouragements] = useState<
+    Set<string>
+  >(new Set());
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   useEffect(() => {
     loadStories();
@@ -44,6 +60,65 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
       setStories(filtered);
     }
     setIsLoading(false);
+  };
+
+  // Xử lý thả tim
+  const handleLike = (storyId: string) => {
+    if (likedStories.has(storyId)) {
+      // Bỏ like
+      setLikedStories((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(storyId);
+        return newSet;
+      });
+      setStories((prev) =>
+        prev.map((s) => (s.id === storyId ? { ...s, hearts: s.hearts - 1 } : s))
+      );
+    } else {
+      // Thêm like
+      setLikedStories((prev) => new Set(prev).add(storyId));
+      setStories((prev) =>
+        prev.map((s) => (s.id === storyId ? { ...s, hearts: s.hearts + 1 } : s))
+      );
+    }
+  };
+
+  // Gửi lời động viên
+  const handleSendEncouragement = () => {
+    if (!encouragementText.trim() || !showEncouragementModal) return;
+
+    const newEncouragement: Encouragement = {
+      id: `e-${Date.now()}`,
+      storyId: showEncouragementModal,
+      message: encouragementText.trim(),
+      createdAt: new Date(),
+    };
+
+    setStories((prev) =>
+      prev.map((s) =>
+        s.id === showEncouragementModal
+          ? { ...s, encouragements: [...s.encouragements, newEncouragement] }
+          : s
+      )
+    );
+
+    setEncouragementText("");
+    setShowEncouragementModal(null);
+    setShowSuccessToast(true);
+    setTimeout(() => setShowSuccessToast(false), 3000);
+  };
+
+  // Toggle xem lời động viên
+  const toggleEncouragements = (storyId: string) => {
+    setExpandedEncouragements((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(storyId)) {
+        newSet.delete(storyId);
+      } else {
+        newSet.add(storyId);
+      }
+      return newSet;
+    });
   };
 
   const formatDate = (date: Date) => {
@@ -214,19 +289,16 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
                 return (
                   <motion.div
                     key={story.id}
-                    initial={{ opacity: 0, y: 30, rotateX: -10 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{
                       delay: index * 0.1,
                       type: "spring",
                       stiffness: 100,
                     }}
-                    whileHover={{ scale: 1.02, rotateX: -2, rotateY: 3, z: 15 }}
-                    className="bg-white rounded-2xl p-6 card-3d"
+                    className="bg-white rounded-2xl shadow-md"
                     style={{
-                      transformStyle: "preserve-3d",
-                      perspective: "1000px",
-                      padding: "0.5rem",
+                      padding: "1rem",
                     }}
                   >
                     {/* Header */}
@@ -256,30 +328,92 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
                     </div>
 
                     {/* Content */}
-                    <p className="text-[#4A3728] leading-relaxed mb-4">
+                    <p
+                      className="text-[#4A3728] leading-relaxed mb-4"
+                      style={{ padding: "0.5rem" }}
+                    >
                       {story.content}
                     </p>
 
                     {/* Actions */}
-                    <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="flex items-center gap-1 text-pink-400 hover:text-pink-500"
+                    <div className="flex flex-wrap items-center gap-3 pt-4 mt-4 border-t border-gray-100">
+                      <button
+                        onClick={() => handleLike(story.id)}
+                        className={`flex items-center gap-2 px-5 py-3 rounded-full transition-all cursor-pointer select-none active:scale-95 ${
+                          likedStories.has(story.id)
+                            ? "bg-pink-100 text-pink-500"
+                            : "bg-gray-100 text-pink-400 hover:bg-pink-50 hover:text-pink-500"
+                        }`}
                       >
-                        <Heart className="w-5 h-5" />
+                        <Heart
+                          className="w-5 h-5"
+                          fill={
+                            likedStories.has(story.id) ? "currentColor" : "none"
+                          }
+                        />
+                        <span className="text-sm font-medium">
+                          {story.hearts}
+                        </span>
                         <span className="text-sm">Đồng cảm</span>
-                      </motion.button>
+                      </button>
 
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="flex items-center gap-1 text-blue-400 hover:text-blue-500"
+                      <button
+                        onClick={() => setShowEncouragementModal(story.id)}
+                        className="flex items-center gap-2 px-5 py-3 rounded-full bg-gray-100 text-blue-400 hover:bg-blue-50 hover:text-blue-500 transition-all cursor-pointer select-none active:scale-95"
                       >
                         <MessageCircle className="w-5 h-5" />
                         <span className="text-sm">Gửi lời động viên</span>
-                      </motion.button>
+                      </button>
+
+                      {story.encouragements.length > 0 && (
+                        <button
+                          onClick={() => toggleEncouragements(story.id)}
+                          className="flex items-center gap-2 px-5 py-3 rounded-full bg-green-50 text-green-500 hover:bg-green-100 hover:text-green-600 transition-all cursor-pointer select-none active:scale-95 ml-auto"
+                        >
+                          <span className="text-sm font-medium">
+                            {story.encouragements.length} lời động viên
+                          </span>
+                          {expandedEncouragements.has(story.id) ? (
+                            <ChevronUp className="w-4 h-4" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4" />
+                          )}
+                        </button>
+                      )}
                     </div>
+
+                    {/* Hiển thị lời động viên */}
+                    <AnimatePresence>
+                      {expandedEncouragements.has(story.id) &&
+                        story.encouragements.length > 0 && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="mt-4 space-y-2 bg-gray-100 rounded-xl p-3">
+                              <p className="text-xs text-gray-500 font-medium mb-2">
+                                💬 Lời động viên từ cộng đồng:
+                              </p>
+                              {story.encouragements.map((enc) => (
+                                <motion.div
+                                  key={enc.id}
+                                  initial={{ x: -10, opacity: 0 }}
+                                  animate={{ x: 0, opacity: 1 }}
+                                  className="bg-white rounded-lg p-4 text-sm"
+                                  style={{
+                                    padding: "0.5rem 0.75rem",
+                                    margin: "0.25rem",
+                                  }}
+                                >
+                                  {enc.message}
+                                </motion.div>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                    </AnimatePresence>
                   </motion.div>
                 );
               })}
@@ -287,6 +421,84 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Modal gửi lời động viên */}
+      <AnimatePresence>
+        {showEncouragementModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            onClick={() => setShowEncouragementModal(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{ padding: "0.5rem" }}
+              className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-[#8B4D5C]">
+                  💌 Gửi lời động viên ẩn danh
+                </h3>
+                <button
+                  onClick={() => setShowEncouragementModal(null)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <textarea
+                value={encouragementText}
+                onChange={(e) => setEncouragementText(e.target.value)}
+                style={{ padding: "0.5rem" }}
+                placeholder="Viết lời động viên của bạn tại đây..."
+                className="w-full h-32 p-3 border border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-pink-300 text-gray-700"
+                maxLength={200}
+              />
+
+              <div className="flex items-center justify-between mt-3">
+                <span className="text-xs text-gray-400">
+                  {encouragementText.length}/200 ký tự
+                </span>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleSendEncouragement}
+                  disabled={!encouragementText.trim()}
+                  style={{ padding: "0.5rem" }}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium ${
+                    encouragementText.trim()
+                      ? "bg-[#E8B4B8] text-white hover:bg-[#d9a3a7]"
+                      : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                  }`}
+                >
+                  <Send className="w-4 h-4" />
+                  <span>Gửi ẩn danh</span>
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Toast thông báo thành công */}
+      <AnimatePresence>
+        {showSuccessToast && (
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 50, opacity: 0 }}
+            className="fixed bottom-20 left-1/2 -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 z-50"
+          >
+            <span>Đã gửi lời động viên thành công!</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Decorations */}
       <motion.div

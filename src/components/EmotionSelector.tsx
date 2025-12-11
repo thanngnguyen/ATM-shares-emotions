@@ -70,7 +70,7 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({
       >
         <div className="w-12 h-12 relative">
           <Image
-            src="/images/icons/decorations/rainbow.png"
+            src="/images/icons/emotions/other-star.gif"
             alt="Rainbow decoration"
             fill
             className="object-contain"
@@ -89,7 +89,7 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({
       >
         <div className="w-12 h-12 relative">
           <Image
-            src="/images/icons/decorations/sparkle.png"
+            src="/images/icons/emotions/relationship-heart.gif"
             alt="Sparkle decoration"
             fill
             className="object-contain"

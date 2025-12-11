@@ -203,7 +203,7 @@ const ActionCardDisplay: React.FC<ActionCardDisplayProps> = ({ onGoHome }) => {
                   </div>
 
                   {/* Mô tả chính */}
-                  <p className="text-lg md:text-xl text-[#3D3D3D] italic leading-relaxed">
+                  <p className="text-lg md:text-xl text-[#3D3D3D] italic leading-relaxed px-4">
                     {selectedCard.description}
                   </p>
 

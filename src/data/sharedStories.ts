@@ -1,8 +1,17 @@
+export interface Encouragement {
+  id: string;
+  storyId: string;
+  message: string;
+  createdAt: Date;
+}
+
 export interface SharedStory {
   id: string;
   emotion: string;
   content: string;
   createdAt: Date;
+  hearts: number;
+  encouragements: Encouragement[];
 }
 
 // Sample anonymous stories for reading
@@ -13,6 +22,21 @@ export const sharedStories: SharedStory[] = [
     content:
       "Mình đang rất áp lực với kỳ thi cuối kỳ. Có quá nhiều môn phải ôn mà thời gian thì không đủ. Đôi khi mình tự hỏi liệu mình có đang cố gắng đúng hướng không...",
     createdAt: new Date("2024-12-09"),
+    hearts: 12,
+    encouragements: [
+      {
+        id: "e1",
+        storyId: "1",
+        message: "Cố lên bạn! Mình tin bạn sẽ làm được! 💪",
+        createdAt: new Date("2024-12-09"),
+      },
+      {
+        id: "e2",
+        storyId: "1",
+        message: "Mình cũng từng như vậy, hãy nghỉ ngơi khi cần nhé!",
+        createdAt: new Date("2024-12-09"),
+      },
+    ],
   },
   {
     id: "2",
@@ -20,6 +44,15 @@ export const sharedStories: SharedStory[] = [
     content:
       "Đi học xa nhà, không có bạn bè thân. Mình cảm thấy cô đơn lạc lõng ở nơi đất khách quê người. Ước gì có ai đó hiểu mình...",
     createdAt: new Date("2024-12-08"),
+    hearts: 24,
+    encouragements: [
+      {
+        id: "e3",
+        storyId: "2",
+        message: "Bạn không cô đơn đâu, mình ở đây lắng nghe bạn! 🤗",
+        createdAt: new Date("2024-12-08"),
+      },
+    ],
   },
   {
     id: "3",
@@ -27,6 +60,8 @@ export const sharedStories: SharedStory[] = [
     content:
       "Hôm nay mình đã hoàn thành xong bài thuyết trình mà mình lo lắng cả tuần! Cảm giác nhẹ nhõm và tự hào vô cùng 💪",
     createdAt: new Date("2024-12-08"),
+    hearts: 45,
+    encouragements: [],
   },
   {
     id: "4",
@@ -34,6 +69,15 @@ export const sharedStories: SharedStory[] = [
     content:
       "Làm việc part-time và học cùng lúc thật sự quá mệt. Có những lúc mình chỉ muốn dừng lại và nghỉ ngơi nhưng không thể...",
     createdAt: new Date("2024-12-07"),
+    hearts: 18,
+    encouragements: [
+      {
+        id: "e4",
+        storyId: "4",
+        message: "Nghỉ ngơi cũng là một phần quan trọng nhé bạn! Take care!",
+        createdAt: new Date("2024-12-07"),
+      },
+    ],
   },
   {
     id: "5",
@@ -41,6 +85,28 @@ export const sharedStories: SharedStory[] = [
     content:
       "Mình và người yêu vừa chia tay. 3 năm bên nhau giờ chỉ còn là kỷ niệm. Mình biết thời gian sẽ chữa lành nhưng bây giờ thì vẫn còn đau lắm...",
     createdAt: new Date("2024-12-07"),
+    hearts: 67,
+    encouragements: [
+      {
+        id: "e5",
+        storyId: "5",
+        message:
+          "Thời gian sẽ chữa lành tất cả. Hãy yêu thương bản thân nhé! 💕",
+        createdAt: new Date("2024-12-07"),
+      },
+      {
+        id: "e6",
+        storyId: "5",
+        message: "Mình hiểu cảm giác đó. Ôm bạn thật chặt! 🫂",
+        createdAt: new Date("2024-12-07"),
+      },
+      {
+        id: "e7",
+        storyId: "5",
+        message: "Đau là để trưởng thành hơn. Bạn sẽ ổn thôi!",
+        createdAt: new Date("2024-12-07"),
+      },
+    ],
   },
   {
     id: "6",
@@ -48,6 +114,8 @@ export const sharedStories: SharedStory[] = [
     content:
       "Mình sắp ra trường mà vẫn chưa biết tương lai sẽ như thế nào. Nỗi lo về công việc, về cuộc sống cứ đè nặng mỗi ngày...",
     createdAt: new Date("2024-12-06"),
+    hearts: 31,
+    encouragements: [],
   },
   {
     id: "7",
@@ -55,6 +123,15 @@ export const sharedStories: SharedStory[] = [
     content:
       "Mình đã cố gắng rất nhiều nhưng kết quả không như mong đợi. Thật sự rất thất vọng về bản thân...",
     createdAt: new Date("2024-12-06"),
+    hearts: 22,
+    encouragements: [
+      {
+        id: "e8",
+        storyId: "7",
+        message: "Thất bại là mẹ thành công! Đừng bỏ cuộc nhé! 🌟",
+        createdAt: new Date("2024-12-06"),
+      },
+    ],
   },
   {
     id: "8",
@@ -62,6 +139,21 @@ export const sharedStories: SharedStory[] = [
     content:
       "Ông mình vừa mất tuần trước. Mình không kịp về thăm ông lần cuối. Nỗi buồn và sự hối tiếc cứ ám ảnh mình mãi...",
     createdAt: new Date("2024-12-05"),
+    hearts: 89,
+    encouragements: [
+      {
+        id: "e9",
+        storyId: "8",
+        message: "Chia buồn cùng bạn. Ông bạn sẽ luôn ở trong tim bạn! 🕊️",
+        createdAt: new Date("2024-12-05"),
+      },
+      {
+        id: "e10",
+        storyId: "8",
+        message: "Gửi bạn thật nhiều yêu thương. Hãy mạnh mẽ nhé! 💗",
+        createdAt: new Date("2024-12-05"),
+      },
+    ],
   },
   {
     id: "9",
@@ -69,6 +161,15 @@ export const sharedStories: SharedStory[] = [
     content:
       "Mình vừa nhận được học bổng! Sau bao nhiêu nỗ lực, cuối cùng cũng được đền đáp. Cảm ơn tất cả những người đã ủng hộ mình! 🎉",
     createdAt: new Date("2024-12-05"),
+    hearts: 156,
+    encouragements: [
+      {
+        id: "e11",
+        storyId: "9",
+        message: "Chúc mừng bạn! Xứng đáng lắm! 🎊",
+        createdAt: new Date("2024-12-05"),
+      },
+    ],
   },
   {
     id: "10",
@@ -76,6 +177,8 @@ export const sharedStories: SharedStory[] = [
     content:
       "Mình không biết mình đang cảm thấy gì. Có lẽ là một sự trống rỗng, mơ hồ về cuộc sống. Mình đang tìm kiếm ý nghĩa của những điều mình đang làm...",
     createdAt: new Date("2024-12-04"),
+    hearts: 15,
+    encouragements: [],
   },
 ];
 

@@ -140,7 +140,7 @@ export default function Home() {
 
                   {/* Listen Card */}
                   <FeatureCard
-                    icon={<span className="text-4xl">📖</span>}
+                    icon={<span className="text-4xl">🌐</span>}
                     title="TÔI MUỐN LẮNG NGHE"
                     description="Đọc tâm sự ẩn danh đã được chọn lọc và gửi lại một lời động viên ấm lòng 🌸"
                     buttonText="BẮT ĐẦU"
@@ -155,7 +155,7 @@ export default function Home() {
                 <div className="flex justify-center">
                   <div className="w-full lg:w-2/3 xl:w-1/2">
                     <FeatureCard
-                      icon={<span className="text-4xl">✨</span>}
+                      icon={<span className="text-4xl">🎬</span>}
                       title="CHUYỂN HÓA CẢM XÚC"
                       description="Nhận một thẻ hành động nhỏ để đưa cảm xúc về trạng thái cân bằng 🌱"
                       buttonText="BẮT ĐẦU"
@@ -192,7 +192,7 @@ export default function Home() {
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <span className="text-2xl">✨</span>
+            <span className="text-2xl">💗</span>
           </motion.div>
         </motion.div>
       )}
