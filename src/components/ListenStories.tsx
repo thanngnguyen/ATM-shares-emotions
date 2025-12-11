@@ -388,7 +388,7 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
                         className="flex items-center gap-2 px-5 py-3 rounded-full bg-gray-100 text-blue-400 hover:bg-blue-50 hover:text-blue-500 transition-all cursor-pointer select-none active:scale-95"
                       >
                         <MessageCircle className="w-5 h-5" />
-                        <span className="text-sm">Gửi lời động viên</span>
+                        <span className="text-sm">Gửi chia sẻ</span>
                       </button>
 
                       {story.encouragements.length > 0 && (
@@ -397,7 +397,7 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
                           className="flex items-center gap-2 px-5 py-3 rounded-full bg-green-50 text-green-500 hover:bg-green-100 hover:text-green-600 transition-all cursor-pointer select-none active:scale-95 ml-auto"
                         >
                           <span className="text-sm font-medium">
-                            {story.encouragements.length} lời động viên
+                            {story.encouragements.length} chia sẻ
                           </span>
                           {expandedEncouragements.has(story.id) ? (
                             <ChevronUp className="w-4 h-4" />
@@ -408,7 +408,7 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
                       )}
                     </div>
 
-                    {/* Hiển thị lời động viên */}
+                    {/* Hiển thị lời chia sẻ */}
                     <AnimatePresence>
                       {expandedEncouragements.has(story.id) &&
                         story.encouragements.length > 0 && (
@@ -420,7 +420,7 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
                           >
                             <div className="mt-4 space-y-2 bg-gray-100 rounded-xl p-3">
                               <p className="text-xs text-gray-500 font-medium mb-2">
-                                💬 Lời động viên từ cộng đồng:
+                                💬 Lời chia sẻ từ cộng đồng:
                               </p>
                               {story.encouragements.map((enc) => (
                                 <motion.div
@@ -448,7 +448,7 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
         </AnimatePresence>
       </div>
 
-      {/* Modal gửi lời động viên */}
+      {/* Modal gửi chia sẻ */}
       <AnimatePresence>
         {showEncouragementModal && (
           <motion.div
@@ -468,7 +468,7 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-[#8B4D5C]">
-                  💌 Gửi lời động viên ẩn danh
+                  💌 Gửi chia sẻ ẩn danh
                 </h3>
                 <button
                   onClick={() => setShowEncouragementModal(null)}
@@ -521,7 +521,7 @@ const ListenStories: React.FC<ListenStoriesProps> = ({ onBack }) => {
             exit={{ y: 50, opacity: 0 }}
             className="fixed bottom-20 left-1/2 -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 z-50"
           >
-            <span>Đã gửi lời động viên thành công!</span>
+            <span>Đã gửi lời chia sẻ thành công!</span>
           </motion.div>
         )}
       </AnimatePresence>
