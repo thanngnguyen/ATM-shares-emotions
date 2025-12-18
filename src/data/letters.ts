@@ -34,7 +34,7 @@ export const letters: Letter[] = [
     id: "pressure-1",
     emotion: "pressure",
     content:
-      "Mình hiểu bạn đang gánh chịu rất nhiều - deadline, bài tập, kỳ vọng từ gia đình và cả chính bạn. Nhưng xin bạn nhớ: bạn là con người, không phải cỗ máy. Dù bạn có làm tốt đến đâu, hãy cho phép bản thân được nghỉ ngơi. Không có thành tích nào quan trọng hơn sức khỏe tinh thần của bạn.",
+      "Có thể bạn đang ngập trong tài liệu và áp lực “không đủ thời gian”. Nhưng hiệu quả không nằm ở học lâu, mà ở sự tỉnh táo và thư thái. Hãy thử tắt điện thoại 15 phút, pha trà hoặc nghe nhạc nhẹ — khi tâm trí được nghỉ ngơi, kiến thức sẽ ở lại lâu hơn.",
     type: "empathy",
   },
   {
@@ -48,7 +48,7 @@ export const letters: Letter[] = [
     id: "pressure-3",
     emotion: "pressure",
     content:
-      "Mình từng nghĩ phải hoàn hảo mới xứng đáng. Nhưng giờ mình hiểu, xứng đáng không đến từ điểm số hay thành tích. Bạn đã rất cố gắng rồi. Và chỉ cần bạn đang cố gắng - theo cách của bạn - là bạn đã đủ tốt rồi.",
+      "Chào người đang vật lộn với deadline và điểm số. Nỗ lực không chỉ nằm trên bảng điểm, mà còn ở những lần bạn không bỏ cuộc. Nếu hôm nay mệt, hãy cho phép mình nghỉ một nhịp — nghỉ ngơi không phải là bỏ cuộc, mà để đủ sức đi tiếp.",
     type: "encouragement",
   },
 
@@ -57,21 +57,21 @@ export const letters: Letter[] = [
     id: "lonely-1",
     emotion: "lonely",
     content:
-      "Cô đơn là một cảm giác mà ai cũng từng trải qua - ngay cả khi ở giữa đám đông. Mình muốn nói với bạn rằng: bạn không cô đơn trong chính cảm giác cô đơn đó. Có rất nhiều người ngoài kia đang cảm nhận giống bạn, và điều đó không làm bạn yếu đuối hay khác biệt.",
+      "Cô đơn là cái bóng của ánh sáng. Có bóng, ta mới biết mình đang đi dưới nắng. Thỉnh thoảng hãy tận hưởng nó: đi dạo một mình, nghe nhạc, ngắm hoàng hôn, nói chuyện với chính mình trong gương… Bạn sẽ thấy, ở một mình cũng có thể rất dễ thương. Có những con đường buộc ta phải đi một mình — đó không phải cô đơn, mà là lựa chọn.",
     type: "empathy",
   },
   {
     id: "lonely-2",
     emotion: "lonely",
     content:
-      "Đôi khi, sự cô đơn là tiếng nói nhẹ nhàng của tâm hồn - muốn được hiểu, được kết nối. Hãy nhẹ nhàng với bản thân, vì bạn xứng đáng được yêu thương - kể cả khi bạn chưa tìm thấy ai hiểu mình lúc này.",
+      "Có lúc, dù xung quanh rất đông, ta vẫn thấy mình đứng ngoài mọi cuộc trò chuyện. Nếu bạn đang cảm giác ấy, bạn không hề kỳ lạ. Bạn có quyền bước chậm hơn, quyền chọn vài người thực sự hiểu mình thay vì cố gắng hợp với tất cả. Ước gì bạn có thể nhìn mình qua đôi mắt của người trân trọng bạn — chắc chắn bạn sẽ dịu dàng với bản thân hơn",
     type: "healing",
   },
   {
     id: "lonely-3",
     emotion: "lonely",
     content:
-      "Bạn có thể cảm thấy mình đang đứng một mình giữa thế giới rộng lớn. Nhưng xin đừng quên: bạn đang tồn tại, bạn đang được nhìn thấy - ít nhất là qua những dòng chữ này. Mình gửi đến bạn một vòng tay ấm áp từ xa.",
+      "Có thể chẳng ai nhận ra nỗi buồn trong mắt bạn, nhưng thế giới vẫn lắng nghe theo cách lặng lẽ. Bạn không cần luôn mạnh mẽ — được yếu đuối, được buồn, được im lặng. Hãy nghỉ một chút và tin rằng: bạn xứng đáng được yêu thương, ngay cả khi chưa ai nói ra.",
     type: "encouragement",
   },
 
@@ -80,21 +80,21 @@ export const letters: Letter[] = [
     id: "tired-1",
     emotion: "tired",
     content:
-      "Khi cơ thể mệt mỏi, tâm trí cũng cần được nghỉ ngơi. Hãy cho phép mình dừng lại - không phải vì bạn yếu đuối, mà vì bạn đang chăm sóc bản thân. Một giấc ngủ ngắn, một ly nước ấm, hay chỉ là một phút thở sâu - đều là yêu thương.",
+      "Có những ngày không có chuyện gì quá tệ, nhưng bạn vẫn mệt, chán và chẳng muốn làm gì. Điều đó không có nghĩa bạn lười biếng hay vô dụng. Có thể cơ thể và tâm trí bạn chỉ đang cần nghỉ ngơi. Một bữa ăn tử tế, một giấc ngủ đủ, một lần ra ngoài hít thở — vậy là đủ. Bạn không cần phải luôn năng suất; có những ngày chỉ cần “tồn tại” thôi cũng đã ổn rồi.",
     type: "healing",
   },
   {
     id: "tired-2",
     emotion: "tired",
     content:
-      "Mình hiểu cảm giác kiệt sức đó - khi mọi thứ dường như quá sức chịu đựng. Nhưng bạn đã rất mạnh mẽ khi vẫn tiếp tục đến hôm nay. Hãy nghỉ ngơi nếu cần, vì ngày mai vẫn còn đó, và bạn xứng đáng được thư giãn.",
+      "Nếu bạn không gọi tên được cảm xúc của mình, cũng không sao cả. Không phải nỗi buồn nào cũng có lời giải thích. Điều quan trọng là bạn vẫn đang ở đây, vẫn tiếp tục thêm một ngày nữa. Có thể trong bạn vẫn còn một phần rất nhỏ chưa muốn bỏ cuộc. Mình tin phần nhỏ ấy sẽ lớn dần lên, từng chút một. Và chỉ riêng điều đó thôi cũng đã rất đáng trân trọng rồi.",
     type: "empathy",
   },
   {
     id: "tired-3",
     emotion: "tired",
     content:
-      'Bạn không cần phải mạnh mẽ mỗi ngày. Có những lúc, việc thừa nhận mình mệt mỏi đã là một dạng can đảm. Hãy ôm lấy sự mệt mỏi đó và nói: "Mình đã cố gắng rất nhiều rồi." Vì đúng là như vậy.',
+      "Khi mọi thứ trở nên quá nặng, bạn có thể đặt chúng xuống một lúc. Không cần gượng cười, không cần mạnh mẽ hơn khả năng của mình. Chỉ cần thành thật thừa nhận: “Mình đang mệt.” Như vậy đã là một khởi đầu của chữa lành. Bạn không cần chạy nhanh hơn ai cả, chỉ cần chậm lại để trái tim kịp theo. Bình yên thôi, cũng đã đủ tuyệt vời rồi 🌿",
     type: "encouragement",
   },
 
@@ -103,21 +103,21 @@ export const letters: Letter[] = [
     id: "anxious-1",
     emotion: "anxious",
     content:
-      'Lo âu là điều bình thường - nó cho thấy bạn đang quan tâm đến điều gì đó. Nhưng đừng để nỗi lo nuốt chửng bạn. Hãy thử hít thở thật sâu, và nhắc nhở bản thân: "Mình đã vượt qua những điều khó khăn trước đây, và mình sẽ lại làm được."',
+      "Có thể bạn mong ai đó nhìn thấu nỗi buồn trong mắt mình, nhưng chưa ai nhận ra. Thật ra, thế giới vẫn đang lắng nghe, chỉ là theo cách lặng lẽ hơn. Bạn không cần luôn mạnh mẽ. Được yếu đuối, được buồn, được im lặng — tất cả đều là bạn. Và bạn xứng đáng được yêu thương, ngay cả khi chưa ai nói ra.",
     type: "healing",
   },
   {
     id: "anxious-2",
     emotion: "anxious",
     content:
-      "Mình từng sợ hãi đến mức không dám bước tiếp. Nhưng rồi mình nhận ra, sợ hãi không có nghĩa là bạn yếu đuối. Nó chỉ có nghĩa là bạn đang đối mặt với điều gì đó quan trọng. Hãy cho phép mình sợ, nhưng đừng để sự sợ hãi dừng bạn lại.",
+      "Khi tim bạn đập nhanh vì lo âu, hãy đặt tay lên ngực, hít sâu một nhịp rồi thở ra chậm rãi. Bạn đã vượt qua rất nhiều ngày tưởng chừng không thể. Những cảm xúc này rồi sẽ trôi qua. Bạn không cần chiến thắng mọi thứ ngay bây giờ — chỉ cần ở lại, tiếp tục đi cùng chính mình thêm một đoạn nữa.",
     type: "empathy",
   },
   {
     id: "anxious-3",
     emotion: "anxious",
     content:
-      "Nếu bạn đang lo lắng về tương lai - hãy nhớ rằng tương lai chưa đến, và hiện tại mới là điều duy nhất bạn có thể kiểm soát. Hãy làm một việc nhỏ hôm nay, chỉ một việc thôi, và tự hào về nó.",
+      "Chào bạn, người đang mang quá nhiều suy nghĩ trong đầu. Không sao nếu lúc này mọi thứ khiến bạn thấy quá sức. Tâm trí thường phóng đại nỗi sợ về tương lai, làm mọi điều trở nên đáng sợ hơn thực tế. Hãy quay về hiện tại: bạn đang ngồi đây, đang thở, và đang an toàn. Từng chút một thôi, bạn không cần giải quyết tất cả trong một ngày.",
     type: "encouragement",
   },
 
@@ -126,21 +126,21 @@ export const letters: Letter[] = [
     id: "disappointed-1",
     emotion: "disappointed",
     content:
-      "Thất vọng là một cảm xúc nặng nề - nó có thể đến từ người khác hoặc từ chính bạn. Nhưng xin bạn nhớ: thất vọng không định nghĩa con người bạn. Bạn vẫn có giá trị, dù mọi thứ không diễn ra như mong đợi.",
+      "Thất vọng xuất hiện khi bạn đã đặt vào đó rất nhiều niềm tin và kỳ vọng. Điều này không khiến bạn yếu đuối, mà cho thấy bạn đã từng cố gắng hết lòng. Đừng tự trách mình hay phủ nhận cảm xúc ấy. Hãy cho trái tim bạn được nghỉ ngơi, như cách mặt đất cần lặng yên sau cơn mưa để đón nắng trở lại.",
     type: "empathy",
   },
   {
     id: "disappointed-2",
     emotion: "disappointed",
     content:
-      "Có những lúc cuộc sống không như bạn mong muốn, và điều đó thật đau. Nhưng hãy nhớ, mỗi lần thất vọng là một bài học - không phải để bạn cảm thấy tồi tệ hơn, mà để bạn trở nên mạnh mẽ và khôn ngoan hơn.",
+      "Có thể lúc này bạn cảm thấy mọi nỗ lực đều vô ích, nhưng thật ra không có cố gắng nào biến mất. Mỗi bước đi, dù nhỏ, đều đang âm thầm tạo nên nền tảng cho tương lai. Bạn chỉ chưa kịp nhìn thấy kết quả mà thôi. Hãy tiếp tục, chậm cũng được, miễn là bạn không bỏ cuộc.",
     type: "healing",
   },
   {
     id: "disappointed-3",
     emotion: "disappointed",
     content:
-      "Bạn có quyền cảm thấy thất vọng, có quyền buồn. Nhưng sau đó, hãy đứng dậy - không phải vì bạn phải, mà vì bạn xứng đáng với một cơ hội mới. Và mình tin bạn sẽ làm được.",
+      "Không ai đi qua cuộc đời mà không vấp ngã và thất vọng. Bạn được phép mệt, được phép buồn và dừng lại một chút để thở. Điều quan trọng là bạn không quên mình vẫn có quyền đứng dậy. Chính những lần tổn thương hôm nay sẽ giúp bạn trưởng thành, mạnh mẽ và dịu dàng hơn với bản thân vào ngày mai.",
     type: "encouragement",
   },
 
@@ -149,21 +149,21 @@ export const letters: Letter[] = [
     id: "sad-1",
     emotion: "sad",
     content:
-      "Nếu bạn đang buồn, mình muốn nói với bạn rằng: buồn là được phép. Bạn không cần phải giả vờ mạnh mẽ hay tươi cười khi lòng đang nặng trĩu. Hãy cho phép mình khóc nếu cần, vì nước mắt cũng là một cách để chữa lành.",
+      "Có những lúc tâm hồn mệt mỏi mà chẳng rõ vì sao, chỉ thấy một khoảng trống lặng lẽ trong lòng. Cảm xúc ấy hoàn toàn hợp lý, bạn không cần tự trách hay ép mình mạnh mẽ ngay lập tức. Hãy cho phép bản thân thở chậm lại, dành một khoảng yên nhỏ để buông bớt điều nặng nề. Rồi sự nhẹ nhõm sẽ quay về, âm thầm nhưng đủ dịu để xoa dịu những nơi đang tổn thương trong bạn.",
     type: "empathy",
   },
   {
     id: "sad-2",
     emotion: "sad",
     content:
-      "Nỗi buồn giống như cơn mưa - nó sẽ qua đi. Có thể không phải ngay bây giờ, nhưng nó sẽ qua. Và khi nắng lên, bạn sẽ thấy mình đã kiên cường hơn mình tưởng. Hãy ở bên cạnh nỗi buồn một chút, rồi nó sẽ tự nhẹ đi.",
+      "Việc bạn dám thừa nhận và chia sẻ nỗi buồn đã là một điều rất dũng cảm. Có những ngày tâm hồn nặng đến mức mọi thứ đều khó khăn, và bạn chỉ mong có ai đó thật sự lắng nghe. Nỗi buồn này không khiến bạn yếu đuối — nó cho thấy bạn đã yêu thương và chịu đựng nhiều hơn người khác nhìn thấy. Hãy cho mình thời gian để mềm yếu, vì chính từ đó sự chữa lành bắt đầu.",
     type: "healing",
   },
   {
     id: "sad-3",
     emotion: "sad",
     content:
-      "Mình gửi đến bạn một cái ôm thật chặt. Bạn không cô đơn trong nỗi buồn này. Có ai đó ngoài kia - có thể là mình - đang nghĩ về bạn và mong bạn sẽ ổn hơn. Hãy tin vào điều đó.",
+      "Nếu hôm nay mọi thứ quá nặng, bạn có thể đặt chúng xuống một chút. Không cần gượng cười, không cần mạnh mẽ hơn khả năng của mình. Chỉ cần thừa nhận: “Mình đang mệt.” Thế là đủ để bắt đầu chữa lành. Bạn không phải chạy nhanh hơn ai cả, chỉ cần chậm lại để trái tim kịp theo. Bình yên thôi, cũng đã đủ tuyệt vời rồi 🌿",
     type: "encouragement",
   },
 

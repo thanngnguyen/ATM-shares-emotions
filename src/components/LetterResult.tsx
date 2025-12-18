@@ -45,7 +45,7 @@ const LetterResult: React.FC<LetterResultProps> = ({
               transition={{ delay: 0.3 }}
               className="absolute"
               style={{
-                top: "18%",
+                top: "20%",
                 left: "7%",
                 width: "40%",
                 height: "22%",
